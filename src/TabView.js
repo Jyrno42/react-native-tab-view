@@ -32,6 +32,7 @@ type Props<T: Route> = {|
   tabBarPosition: 'top' | 'bottom',
   initialLayout?: { width?: number, height?: number },
   lazy: boolean,
+  lazyThreshold: number,
   removeClippedSubviews?: boolean,
   sceneContainerStyle?: ViewStyleProp,
   style?: ViewStyleProp,
@@ -52,6 +53,7 @@ export default class TabView<T: Route> extends React.Component<
     keyboardDismissMode: 'on-drag',
     swipeEnabled: true,
     lazy: false,
+    lazyThreshold: 0,
     removeClippedSubviews: false,
     springConfig: {},
     timingConfig: {},
@@ -91,6 +93,7 @@ export default class TabView<T: Route> extends React.Component<
       onSwipeEnd,
       navigationState,
       lazy,
+      lazyThreshold,
       removeClippedSubviews,
       keyboardDismissMode,
       swipeEnabled,
@@ -149,6 +152,7 @@ export default class TabView<T: Route> extends React.Component<
                         key={route.key}
                         index={i}
                         lazy={lazy}
+                        lazyThreshold={lazyThreshold}
                         navigationState={navigationState}
                         style={sceneContainerStyle}
                       >
