@@ -18,7 +18,7 @@ import type {
 
 type Props<T: Route> = {|
   ...PagerCommonProps,
-  onIndexChange: (index: number) => mixed,
+  onIndexChange: (index: number, method: 'gesture' | 'tap') => mixed,
   navigationState: NavigationState<T>,
   renderScene: (props: {|
     ...SceneRendererProps,
@@ -61,9 +61,9 @@ export default class TabView<T: Route> extends React.Component<
     layout: { width: 0, height: 0, ...this.props.initialLayout },
   };
 
-  _jumpToIndex = (index: number) => {
+  _jumpToIndex = (index: number, method: 'gesture' | 'tap') => {
     if (index !== this.props.navigationState.index) {
-      this.props.onIndexChange(index);
+      this.props.onIndexChange(index, method);
     }
   };
 

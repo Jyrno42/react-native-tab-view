@@ -16,7 +16,7 @@ import type {
 
 type Props<T: Route> = {|
   ...PagerCommonProps,
-  onIndexChange: (index: number) => mixed,
+  onIndexChange: (index: number, method: 'gesture' | 'tap') => mixed,
   navigationState: NavigationState<T>,
   layout: Layout,
   // Clip unfocused views to improve memory usage
@@ -323,7 +323,7 @@ export default class Pager<T: Route> extends React.Component<Props<T>> {
     if (navigationState.index === index) {
       this._jumpToIndex(index);
     } else {
-      this.props.onIndexChange(index);
+      this.props.onIndexChange(index, 'tap');
     }
   };
 
@@ -435,7 +435,7 @@ export default class Pager<T: Route> extends React.Component<Props<T>> {
         // Without this check, the pager can go to an infinite update <-> animate loop for sync updates
         if (value !== this.props.navigationState.index) {
           // If the index changed, and previous animation has finished, update state
-          this.props.onIndexChange(value);
+          this.props.onIndexChange(value, 'gesture');
 
           this._pendingIndexValue = value;
 
